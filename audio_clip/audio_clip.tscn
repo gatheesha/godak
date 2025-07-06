@@ -1,33 +1,130 @@
-[gd_scene load_steps=2 format=3 uid="uid://vem0gynk856"]
+[gd_scene load_steps=10 format=3 uid="uid://vem0gynk856"]
 
 [ext_resource type="Script" uid="uid://0lt54r6wilv7" path="res://audio_clip/audio_clip.gd" id="1_up2mm"]
+[ext_resource type="FontFile" uid="uid://cbkw2x7d5v3am" path="res://assets/WorkSans-Bold.ttf" id="1_xniky"]
+[ext_resource type="FontFile" uid="uid://dhymyd1svq4ex" path="res://assets/SpaceGrotesk-Medium.ttf" id="1_y6d2e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xniky"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3m181"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 1
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_616f3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_616f3"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqyii"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="Theme" id="Theme_jqyii"]
+default_font = ExtResource("1_y6d2e")
+default_font_size = 32
+Button/styles/normal = SubResource("StyleBoxFlat_xniky")
+Button/styles/pressed = SubResource("StyleBoxFlat_3m181")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_xniky")
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_616f3")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_616f3")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_jqyii")
+SubText/base_type = &"Label"
+SubText/colors/font_color = Color(0.101961, 0.101961, 0.101961, 0.301961)
+SubText/font_sizes/font_size = 16
+SubText/fonts/font = ExtResource("1_y6d2e")
 
 [node name="AudioClip" type="PanelContainer"]
 custom_minimum_size = Vector2(192, 128)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 256.0
+offset_bottom = 128.0
+mouse_filter = 2
+theme = SubResource("Theme_jqyii")
 script = ExtResource("1_up2mm")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 2
 
 [node name="DisplayName" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 2
-text = "Nama hutto"
+size_flags_horizontal = 0
+size_flags_vertical = 1
+text = "Display Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"SubText"
+text = "14sec"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 50.0
+show_percentage = false
 
 [node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
-flat = true
+text = "cdshjabhjfbdhbfhbhbhbhb"
+text_overrun_behavior = 3
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

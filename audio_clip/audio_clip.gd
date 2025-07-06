@@ -11,14 +11,19 @@ var is_fading_enabled : bool
 
 var audio_stream : AudioStream
 
-func _init(current_name : String, stream : AudioStream) -> void:
-	display_name = current_name
-	audio_stream = stream
+#func _init(current_name : String, stream : AudioStream) -> void:
+	#pass
+	#display_name = current_name
+	#audio_stream = stream
+
+
 
 func _ready() -> void:
-	#%DisplayName.text = display_name
-	#%AudioStreamPlayer.stream = audio_stream
-	pass
+	display_name = original_name
+	%DisplayName.text = display_name
+	%Button.text = display_name
+	%AudioStreamPlayer.stream = audio_stream
+
 
 func _on_button_pressed() -> void:
 	%AudioStreamPlayer.play()

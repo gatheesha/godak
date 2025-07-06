@@ -1,9 +1,11 @@
 extends Control
 
-@export var audio_grid : GridContainer 
+@export var audio_grid : FlowContainer 
 @export var file_dialog : FileDialog
 
-var audio_resources = {}
+const AUDIO_CLIP = preload("res://audio_clip/audio_clip.tscn")
+
+var audio_resources = {} 
 
 
 func _ready():
@@ -11,7 +13,6 @@ func _ready():
 	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES
 	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	file_dialog.connect("files_selected", _on_files_selected)
-	
 	get_viewport().files_dropped.connect(_on_files_dropped)
 
 
@@ -39,9 +40,6 @@ func _on_files_dropped(files):
 
 
 func load_audio_file(path):
-	print(path)
-	#var player = AudioStreamPlayer.new()
-	
 	var audio_resource : AudioStream
 	if path.ends_with(".mp3"):
 		if FileAccess.file_exists(path):
@@ -53,25 +51,12 @@ func load_audio_file(path):
 		if FileAccess.file_exists(path):
 			audio_resource = AudioStreamWAV.load_from_file(path)
 	
-	
 	if audio_resource:
-		var file_name = path.get_file()
-		var new_audio_clip = AudioClip.new(file_name, audio_resource)
-		audio_grid.add_child(new_audio_clip)
-		#player.stream = audio_resource
-		#new_audio_clip.audio_stream_player.stream = audio_resource
-		
-		#var audio_button = Button.new()
-		
-		#audio_button.text = file_name
-		#new_audio_clip.display_name = file_name
-		
-		#audio_button.pressed.connect(_on_audio_button_pressed.bind(file_name))
-		
-		#audio_grid.add_child(audio_button)
-		#add_child(player)
-		
-		#audio_resources[file_name] = player
+		var file_name = path.get_file()	
+		var audio_clip_instance : AudioClip = AUDIO_CLIP.instantiate()
+		audio_clip_instance.audio_stream = audio_resource
+		audio_clip_instance.original_name = file_name
+		audio_grid.add_child(audio_clip_instance)
 	else:
 		print("Failed to load audio file: ", path)
 

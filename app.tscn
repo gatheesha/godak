@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7q3tol4o8lac"]
 
-[ext_resource type="Script" uid="uid://uybrv4c4xxwh" path="res://control.gd" id="1_0fbet"]
+[ext_resource type="Script" uid="uid://uybrv4c4xxwh" path="res://app.gd" id="1_j6dmo"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("audio_grid", "file_dialog")]
+[node name="App" type="Control" node_paths=PackedStringArray("audio_grid", "file_dialog")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ offset_right = -64.0
 offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0fbet")
+script = ExtResource("1_j6dmo")
 audio_grid = NodePath("ScrollContainer/GridContainer")
 file_dialog = NodePath("FileDialog")
 
@@ -45,8 +45,11 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+[node name="GridContainer" type="FlowContainer" parent="ScrollContainer"]
 layout_mode = 2
-columns = 5
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Import" to="." method="_on_import_pressed"]
