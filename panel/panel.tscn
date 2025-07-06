@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjhhw0xd6282m"]
+
+[ext_resource type="Script" uid="uid://d2qe1kl6v6ije" path="res://panel/panel.gd" id="1_8b25k"]
+[ext_resource type="PackedScene" uid="uid://bfykok3ld6iit" path="res://audio_clip_settings/audio_clip_settings.tscn" id="2_ut24i"]
+
+[node name="Panel" type="MarginContainer" node_paths=PackedStringArray("file_dialog")]
+offset_right = 194.0
+offset_bottom = 31.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_8b25k")
+file_dialog = NodePath("FileDialog")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="AudioClipSettings" parent="VBoxContainer" instance=ExtResource("2_ut24i")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Import" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Import"
+
+[node name="Stop" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop"
+
+[node name="Settings" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Settings"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+position = Vector2i(0, 36)
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Import" to="." method="_on_import_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Stop" to="." method="_on_stop_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Settings" to="." method="_on_settings_pressed"]

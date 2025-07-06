@@ -17,7 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
+soundboard_manager="*res://soundboard_manager.gd"
+
+[global_group]
+
+audio_clips=""
 
 [rendering]
 

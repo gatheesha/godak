@@ -1,55 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7q3tol4o8lac"]
+[gd_scene load_steps=4 format=3 uid="uid://b7q3tol4o8lac"]
 
 [ext_resource type="Script" uid="uid://uybrv4c4xxwh" path="res://app.gd" id="1_j6dmo"]
+[ext_resource type="PackedScene" uid="uid://bjhhw0xd6282m" path="res://panel/panel.tscn" id="2_i4801"]
+[ext_resource type="Script" uid="uid://5eexlsjakntb" path="res://audio_grid/grid_container.gd" id="2_qbwvd"]
 
-[node name="App" type="Control" node_paths=PackedStringArray("audio_grid", "file_dialog")]
+[node name="App" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = -64.0
-offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_j6dmo")
-audio_grid = NodePath("ScrollContainer/GridContainer")
-file_dialog = NodePath("FileDialog")
-
-[node name="FileDialog" type="FileDialog" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -62.0
-offset_bottom = 40.0
-grow_horizontal = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Import" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Import"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -76.0
+offset_bottom = -72.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 horizontal_scroll_mode = 0
 
 [node name="GridContainer" type="FlowContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
+script = ExtResource("2_qbwvd")
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Import" to="." method="_on_import_pressed"]
+[node name="Panel" parent="." instance=ExtResource("2_i4801")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -97.0
+offset_top = -171.0
+offset_right = 97.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
