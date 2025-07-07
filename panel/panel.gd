@@ -25,4 +25,3 @@ func _on_stop_pressed() -> void:
 func _on_settings_pressed() -> void:
 	pass
 	
-	

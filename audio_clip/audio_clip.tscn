@@ -46,13 +46,14 @@ show_percentage = false
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
-text = "cdshjabhjfbdhbfhbhbhbhb"
+text = "sdsfasdfsdaf"
 text_overrun_behavior = 3
 
 [node name="ButtonHoldTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
 
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

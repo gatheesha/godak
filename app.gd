@@ -14,3 +14,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		if event.pressed:
 			soundboard_manager.toggle_audio_settings_off()
+
+
+func _on_save_button_pressed() -> void:
+	soundboard_manager.save_soundboard("project.soundboard")
+
+
+func _on_load_button_pressed() -> void:
+	soundboard_manager.load_soundboard("project.soundboard")
