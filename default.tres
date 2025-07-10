@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bx4i3x1ork41p"]
+
+[ext_resource type="FontFile" uid="uid://xud46v8o3nom" path="res://assets/Quicksand-Bold.ttf" id="1_nixot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nixot"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[resource]
+default_font = ExtResource("1_nixot")
+default_font_size = 32
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_nixot")

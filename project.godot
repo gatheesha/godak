@@ -19,9 +19,20 @@ config/icon="res://icon.svg"
 
 soundboard_manager="*res://soundboard_manager.gd"
 
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
+window/size/window_width_override=720
+window/size/window_height_override=1280
+
 [global_group]
 
 audio_clips=""
+
+[gui]
+
+theme/custom="uid://bx4i3x1ork41p"
 
 [rendering]
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpkabwl483e1d"]
+
+[ext_resource type="Script" uid="uid://b1u6j3yyvxotn" path="res://background/background.gd" id="1_p8qmt"]
+
+[node name="Background" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_p8qmt")

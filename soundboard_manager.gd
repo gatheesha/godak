@@ -7,6 +7,9 @@ const DEFAULT_SAVE_DIRECTORY = "user://sound_file_godawal/"
 var audio_grid
 var audio_clip_settings
 
+var current_base_color : Color
+var base_color : Color = Color.BLACK
+
 var sounds: Array[AudioClip] = []
 
 signal stop_all_sounds
@@ -16,6 +19,18 @@ func _ready():
 	if not DirAccess.dir_exists_absolute(DEFAULT_SAVE_DIRECTORY):
 		DirAccess.open("user://").make_dir_recursive_absolute(DEFAULT_SAVE_DIRECTORY)
 		
+		
+func update_base_color(new_color : Color, duration : float = 1.0):
+	var tween : Tween = create_tween()
+	tween.tween_method(set_current_base_color, current_base_color, new_color, duration)
+
+func set_current_base_color(new_color : Color):
+	current_base_color = new_color
+
+
+#func _process(delta: float) -> void:
+	#current_base_color = lerp(current_base_color, base_color, delta)
+#
 
 func get_audio_stream(path) -> AudioStream:
 	var audio_resource : AudioStream
@@ -335,3 +350,15 @@ func export_soundboard_list(export_path: String) -> bool:
 		file.close()
 		return true
 	return false
+
+
+
+func set_master_volume(volume_percent: float) -> void:
+	volume_percent = clamp(volume_percent, 0.0, 100.0)
+	var volume_db = remap(volume_percent, 0.0, 100.0, -80.0, 0.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume_db)
+
+
+func get_master_volume() -> float:
+	var volume_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+	return remap(volume_db, -80.0, 0.0, 0.0, 100.0)

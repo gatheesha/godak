@@ -15,6 +15,8 @@ var is_loop_enabled : bool
 var original_name : String
 var audio_file_path : String = ""
 var is_playing : bool
+var color : Color
+var duration : float
 var volume : float = 100.0:
 	set (value):
 		volume = value
@@ -24,6 +26,7 @@ var volume : float = 100.0:
 @onready var display_name_label: Label = %DisplayName
 @onready var button: Button = %Button
 @onready var button_hold_timer: Timer = %ButtonHoldTimer
+@onready var panel_container: PanelContainer = self
 
 
 func _ready() -> void:
@@ -32,6 +35,19 @@ func _ready() -> void:
 	update_audio_stream(audio_stream)
 	update_volume(100.0)
 	soundboard_manager.stop_all_sounds.connect(_on_stop_all_sounds)
+	update_panel_random_hue()
+	
+	
+
+func update_panel_random_hue():
+	var style_box: StyleBoxFlat = panel_container.get_theme_stylebox("panel")
+	var current_color = style_box.bg_color
+	var random_hue = randf_range(0.0,1.0)
+	var new_color = Color.from_hsv(random_hue, 0.7, 1.0, current_color.a)
+	style_box.bg_color = new_color
+	#panel_container.add_theme_stylebox_override("panel", style_box)
+	
+	color = new_color
 	
 	
 func update_display_name(new_name : String) -> void:
@@ -42,8 +58,9 @@ func update_display_name(new_name : String) -> void:
 	
 	
 func update_audio_stream(new_stream : AudioStream) -> void:
-	if audio_stream_player:
+	if audio_stream_player and new_stream:
 		audio_stream_player.stream = new_stream
+		duration = new_stream.get_length()
 	
 	
 func update_volume(new_volume : float) -> void:
@@ -53,6 +70,7 @@ func update_volume(new_volume : float) -> void:
 	
 func _on_button_pressed() -> void:
 	audio_stream_player.play()
+	soundboard_manager.update_base_color(color, duration)
 	
 	
 func _on_stop_all_sounds() -> void:
@@ -79,3 +97,4 @@ func delete_audio_clip() -> void:
 func _on_audio_stream_player_finished() -> void:
 	if is_loop_enabled:
 		audio_stream_player.play()
+	soundboard_manager.update_base_color(Color.BLACK, duration/4)

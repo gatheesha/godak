@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7q3tol4o8lac"]
+[gd_scene load_steps=5 format=3 uid="uid://b7q3tol4o8lac"]
 
 [ext_resource type="Script" uid="uid://uybrv4c4xxwh" path="res://app.gd" id="1_j6dmo"]
+[ext_resource type="PackedScene" uid="uid://cpkabwl483e1d" path="res://background/background.tscn" id="2_d7sxu"]
 [ext_resource type="PackedScene" uid="uid://bjhhw0xd6282m" path="res://panel/panel.tscn" id="2_i4801"]
 [ext_resource type="Script" uid="uid://5eexlsjakntb" path="res://audio_grid/grid_container.gd" id="2_qbwvd"]
 
@@ -14,12 +15,18 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_j6dmo")
 
+[node name="Background" parent="." instance=ExtResource("2_d7sxu")]
+layout_mode = 1
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -72.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -104.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -36,14 +43,12 @@ script = ExtResource("2_qbwvd")
 
 [node name="Panel" parent="." instance=ExtResource("2_i4801")]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -97.0
-offset_top = -171.0
-offset_right = 97.0
+offset_top = -31.0
+offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 0

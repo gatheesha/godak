@@ -10,16 +10,20 @@ load_file_dialog = NodePath("LoadFileDialog")
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
+force_native = true
 access = 2
 filters = PackedStringArray(".godk")
+use_native_dialog = true
 
 [node name="LoadFileDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
 title = "Open a File"
+force_native = true
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.godk")
+use_native_dialog = true
 
 [node name="SaveButton" type="Button" parent="."]
 layout_mode = 2
@@ -36,7 +40,6 @@ text = "New Project"
 [node name="VolumeController" parent="." instance=ExtResource("1_sdyqd")]
 layout_mode = 2
 
-[connection signal="dir_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_dir_selected"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
