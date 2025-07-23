@@ -1,72 +1,172 @@
-[gd_scene load_steps=3 format=3 uid="uid://vem0gynk856"]
+[gd_scene load_steps=7 format=3 uid="uid://vem0gynk856"]
 
 [ext_resource type="Script" uid="uid://0lt54r6wilv7" path="res://audio_clip/audio_clip.gd" id="1_up2mm"]
+[ext_resource type="AudioStream" uid="uid://bnmgw2q2vnyy7" path="res://assets/DM-CGS-21.wav" id="2_y6d2e"]
+
+[sub_resource type="Shader" id="Shader_up2mm"]
+code = "shader_type canvas_item;
+
+uniform float strength : hint_range(0,20) = 5;
+uniform float randomOffset = 1.0;
+
+float random( float seed )
+{
+	return fract( 543.2543 * sin( dot( vec2( seed, seed ), vec2( 3525.46 + randomOffset, -54.3415 ) ) ) );
+}
+
+void vertex()
+{
+	vec2 VERTEX_OFFSET = VERTEX;
+	VERTEX_OFFSET.x += (
+		random(
+			( trunc( VERTEX_OFFSET.y))
+		+	TIME
+		) - 0.5
+	) * strength ;
+
+	VERTEX_OFFSET.y += (
+		random(
+			( trunc( VERTEX_OFFSET.x))
+		+	TIME
+		) - 0.5
+	) * strength;
+	
+	VERTEX = VERTEX_OFFSET;	
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6d2e"]
+resource_local_to_scene = true
+shader = SubResource("Shader_up2mm")
+shader_parameter/strength = 0.0
+shader_parameter/randomOffset = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up2mm"]
-content_margin_left = 8.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 8.0
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+bg_color = Color(1, 0.94902, 0.913725, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6d2e"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
 
 [node name="AudioClip" type="PanelContainer" groups=["audio_clips"]]
-custom_minimum_size = Vector2(192, 128)
-offset_right = 256.0
+material = SubResource("ShaderMaterial_y6d2e")
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
 offset_bottom = 128.0
+size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_up2mm")
 script = ExtResource("1_up2mm")
 
+[node name="Shadow" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = -8
+theme_override_constants/margin_bottom = -16
+
+[node name="PanelContainer" type="PanelContainer" parent="Shadow"]
+show_behind_parent = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_y6d2e")
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-alignment = 2
-
-[node name="DisplayName" type="Label" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "Display Name"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"SubText"
-text = "14sec"
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-value = 50.0
-show_percentage = false
-
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." groups=["no_sound_button"]]
 unique_name_in_owner = true
 layout_mode = 2
-text = "sdsfasdfsdaf"
 flat = true
 text_overrun_behavior = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="DisplayName" type="Label" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+use_parent_material = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Display Name
+Display Name
+Display Nameeeee
+Display Name
+Display Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="StopOverlay" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/StopOverlay"]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
+
+[node name="StopButton" type="Button" parent="VBoxContainer/StopOverlay/HBoxContainer" groups=["no_sound_button"]]
+unique_name_in_owner = true
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop"
 
 [node name="ButtonHoldTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
 
+[node name="StopTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="SpawnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_y6d2e")
+
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StopOverlay/HBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]
 [connection signal="timeout" from="ButtonHoldTimer" to="." method="_on_button_hold_timer_timeout"]
+[connection signal="timeout" from="StopTimer" to="." method="_on_stop_timer_timeout"]

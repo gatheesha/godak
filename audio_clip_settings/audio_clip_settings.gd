@@ -24,6 +24,7 @@ func connect_audio_clip(clip : AudioClip) -> void:
 	audio_clip = clip
 	volume_controller.volume = audio_clip.volume
 	visible = true
+	$AudioStreamPlayer.play()
 	
 	
 func disconnect_audio_clip() -> void:

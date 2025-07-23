@@ -1,9 +1,102 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7q3tol4o8lac"]
+[gd_scene load_steps=11 format=3 uid="uid://b7q3tol4o8lac"]
 
 [ext_resource type="Script" uid="uid://uybrv4c4xxwh" path="res://app.gd" id="1_j6dmo"]
 [ext_resource type="PackedScene" uid="uid://cpkabwl483e1d" path="res://background/background.tscn" id="2_d7sxu"]
 [ext_resource type="PackedScene" uid="uid://bjhhw0xd6282m" path="res://panel/panel.tscn" id="2_i4801"]
 [ext_resource type="Script" uid="uid://5eexlsjakntb" path="res://audio_grid/grid_container.gd" id="2_qbwvd"]
+[ext_resource type="PackedScene" uid="uid://bl8vda4h2bwyh" path="res://Notify/notify.tscn" id="4_nee2x"]
+[ext_resource type="Script" uid="uid://bx600xmw11qfk" path="res://bottom_bar/bottom_bar.gd" id="4_v7vdx"]
+
+[sub_resource type="Shader" id="Shader_d7sxu"]
+code = "shader_type canvas_item;
+
+uniform float cell_size = 16;
+uniform float dot_size : hint_range(0.0, 0.5) = 0.25;
+uniform vec4 background_color : source_color = vec4(0.1176, 0.1176, 0.1176, 1.0);
+uniform vec4 dot_color : source_color = vec4(0.2156, 0.2156, 0.2156, 1.0);
+uniform vec2 resolution; // Resolution of the screen or viewport
+uniform vec2 offset; // Offset to move the grid at runtime!
+uniform float anti_aliasing_factor = 0.01; // Adjust this value for more/less smoothness
+uniform int stochastic_samples = 16; // Number of stochastic samples per pixel
+
+// Pseudo-random number generator function
+float random(vec2 st){
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
+void fragment() {
+    vec2 uv = FRAGCOORD.xy / resolution;
+    vec4 finalColor = vec4(0.0);
+    
+    for (int i = 0; i < stochastic_samples; ++i) {
+        // Generate random offset within the pixel
+        vec2 randomOffset = vec2(
+            random(vec2(float(i), 0.0)),
+            random(vec2(0.0, float(i)))
+        ) / resolution;
+        
+        // Apply offset and scale by cell_size
+        vec2 scaled_pos = ((uv + randomOffset) * resolution + offset) / cell_size;
+        
+        // Find the nearest grid intersection in normalized space
+        vec2 nearest_grid = round(scaled_pos) * cell_size;
+        
+        // Calculate the distance to the nearest grid intersection
+        float dist = length(((uv + randomOffset) * resolution + offset) - nearest_grid);
+        
+        // Convert dot_size to an actual radius based on grid_size
+        float radius = dot_size * cell_size * 0.5;
+        
+        // Anti-aliasing: Smooth transition near the edge of the dot
+        float edge_smoothness = anti_aliasing_factor;
+        float alpha = smoothstep(radius - edge_smoothness, radius + edge_smoothness, dist);
+        
+        // Mix dot_color and background_color based on alpha
+        finalColor += mix(dot_color, background_color, alpha);
+    }
+    
+    // Average the colors from all samples
+    COLOR = finalColor / float(stochastic_samples);
+	
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nee2x"]
+shader = SubResource("Shader_d7sxu")
+shader_parameter/cell_size = 32.0
+shader_parameter/dot_size = 0.1
+shader_parameter/background_color = Color(1, 0.717647, 0.0117647, 1)
+shader_parameter/dot_color = Color(0.9, 0.64755, 0.00899999, 1)
+shader_parameter/resolution = Vector2(10, 10)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/anti_aliasing_factor = 0.01
+shader_parameter/stochastic_samples = 1
+
+[sub_resource type="Shader" id="Shader_nee2x"]
+code = "shader_type canvas_item;
+
+// Uniforms
+uniform sampler2D screen_texture : hint_screen_texture;
+uniform float grain_amount : hint_range(0.0, 1.0) = 0.05; // Adjust the amount of grain
+uniform float grain_size : hint_range(0.1, 10.0) = 1.0; // Adjust the size of the grain
+
+void fragment() {
+    // Sample the original screen texture
+    vec4 original_color = texture(screen_texture, SCREEN_UV);
+
+    // Generate random noise
+    float noise = (fract(sin(dot(UV, vec2(12.9898, 78.233))) * 43758.5453) - 0.5) * 2.0;
+
+    // Add noise to the original color
+    original_color.rgb += noise * grain_amount * grain_size;
+
+    // Clamp the final color to make sure it stays in the valid range
+    COLOR = clamp(original_color, 0.0, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7vdx"]
+shader = SubResource("Shader_nee2x")
+shader_parameter/grain_amount = 0.03
+shader_parameter/grain_size = 0.6
 
 [node name="App" type="Control"]
 layout_mode = 3
@@ -16,23 +109,40 @@ mouse_filter = 2
 script = ExtResource("1_j6dmo")
 
 [node name="Background" parent="." instance=ExtResource("2_d7sxu")]
+visible = false
 layout_mode = 1
+color = Color(1, 0.717647, 0.0117647, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Background2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_nee2x")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = -32.0
-offset_bottom = -104.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(1, 0.717647, 0.0117647, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="FlowContainer" parent="ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -41,14 +151,33 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 script = ExtResource("2_qbwvd")
 
-[node name="Panel" parent="." instance=ExtResource("2_i4801")]
+[node name="BottomBar" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_top = -64.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("4_v7vdx")
+
+[node name="Notify" parent="BottomBar" instance=ExtResource("4_nee2x")]
+layout_mode = 2
+
+[node name="Panel" parent="BottomBar" instance=ExtResource("2_i4801")]
+layout_mode = 2
+
+[node name="PostProcessing" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="PostProcessing"]
+material = SubResource("ShaderMaterial_v7vdx")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="child_entered_tree" from="MarginContainer/ScrollContainer/GridContainer" to="MarginContainer/ScrollContainer/GridContainer" method="_on_child_entered_tree"]

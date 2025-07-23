@@ -1,6 +1,44 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bx4i3x1ork41p"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bx4i3x1ork41p"]
 
-[ext_resource type="FontFile" uid="uid://xud46v8o3nom" path="res://assets/Quicksand-Bold.ttf" id="1_nixot"]
+[ext_resource type="FontFile" uid="uid://h11s10ie5be5" path="res://assets/prstartk.ttf" id="1_nixot"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nixot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jsgte"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frq1j"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lb50s"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 0.717647, 0.0117647, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nixot"]
 content_margin_left = 8.0
@@ -8,14 +46,19 @@ content_margin_top = 8.0
 content_margin_right = 8.0
 content_margin_bottom = 8.0
 bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_detail = 4
 
 [resource]
 default_font = ExtResource("1_nixot")
-default_font_size = 32
-Button/colors/font_color = Color(1, 1, 1, 1)
+default_font_size = 16
+Button/colors/font_color = Color(1, 0.717647, 0.0117647, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_nixot")
+Button/styles/hover = SubResource("StyleBoxFlat_jsgte")
+Button/styles/normal = SubResource("StyleBoxFlat_frq1j")
+Button/styles/pressed = SubResource("StyleBoxFlat_lb50s")
+Label/colors/font_color = Color(0, 0, 0, 1)
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_nixot")

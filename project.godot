@@ -17,14 +17,16 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-soundboard_manager="*res://soundboard_manager.gd"
+soundboard_manager="*res://global/soundboard_manager.gd"
+ButtonSoundPlayer="*res://global/button_sound_player.tscn"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
-window/size/window_width_override=720
-window/size/window_height_override=1280
+window/size/window_width_override=480
+window/size/window_height_override=853
+window/handheld/orientation=1
 
 [global_group]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfykok3ld6iit"]
+[gd_scene load_steps=4 format=3 uid="uid://bfykok3ld6iit"]
 
 [ext_resource type="Script" uid="uid://moaybw2efyvq" path="res://audio_clip_settings/audio_clip_settings.gd" id="1_d3307"]
 [ext_resource type="PackedScene" uid="uid://sayqhlslio3r" path="res://volume_controller/volume_controller.tscn" id="2_6mynr"]
+[ext_resource type="AudioStream" uid="uid://dt6awhwiqy7yl" path="res://assets/DM-CGS-03.wav" id="3_s01mg"]
 
 [node name="AudioClipSettings" type="VBoxContainer" node_paths=PackedStringArray("rename_popup", "file_replace_dialog", "volume_controller")]
 anchors_preset = 7
@@ -21,24 +22,34 @@ volume_controller = NodePath("VolumeController")
 
 [node name="ReplaceButton" type="Button" parent="."]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.94902, 0.384314, 1)
 text = "Replace"
 
 [node name="RenameButton" type="Button" parent="."]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.94902, 0.384314, 1)
 text = "Rename"
 
 [node name="DeleteButton" type="Button" parent="."]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.87451, 0.94902, 0.384314, 1)
 text = "Delete"
 
 [node name="LoopButton" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.87451, 0.94902, 0.384314, 1)
 toggle_mode = true
 text = "Loop"
 
 [node name="VolumeController" parent="." instance=ExtResource("2_6mynr")]
 layout_mode = 2
+
+[node name="IncreaseButton" parent="VolumeController" index="0"]
+theme_override_colors/font_color = Color(0.87451, 0.94902, 0.384314, 1)
+
+[node name="DecreaseButton" parent="VolumeController" index="2"]
+theme_override_colors/font_color = Color(0.87451, 0.94902, 0.384314, 1)
 
 [node name="RenamePopup" type="PopupPanel" parent="."]
 auto_translate_mode = 1
@@ -50,8 +61,8 @@ keep_title_visible = true
 [node name="VBoxContainer" type="VBoxContainer" parent="RenamePopup"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 120.0
-offset_bottom = 132.0
+offset_right = 180.0
+offset_bottom = 152.0
 
 [node name="Title" type="Label" parent="RenamePopup/VBoxContainer"]
 layout_mode = 2
@@ -79,6 +90,9 @@ ok_button_text = "Open"
 mode_overrides_title = false
 file_mode = 0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s01mg")
+
 [connection signal="pressed" from="ReplaceButton" to="." method="_on_replace_button_pressed"]
 [connection signal="pressed" from="RenameButton" to="." method="_on_rename_button_pressed"]
 [connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
@@ -87,3 +101,5 @@ file_mode = 0
 [connection signal="text_submitted" from="RenamePopup/VBoxContainer/RenameLineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="RenamePopup/VBoxContainer/DoneButton" to="." method="_on_done_button_pressed"]
 [connection signal="pressed" from="RenamePopup/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+
+[editable path="VolumeController"]

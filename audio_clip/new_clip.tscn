@@ -1,0 +1,139 @@
+[gd_scene load_steps=6 format=3 uid="uid://fij6pi64m2ij"]
+
+[ext_resource type="Script" uid="uid://c1gsou8u7yrx2" path="res://audio_clip/new_clip.gd" id="1_ugkps"]
+
+[sub_resource type="Shader" id="Shader_up2mm"]
+code = "shader_type canvas_item;
+
+uniform float strength : hint_range(0,20) = 5;
+uniform float randomOffset = 1.0;
+
+float random( float seed )
+{
+	return fract( 543.2543 * sin( dot( vec2( seed, seed ), vec2( 3525.46 + randomOffset, -54.3415 ) ) ) );
+}
+
+void vertex()
+{
+	vec2 VERTEX_OFFSET = VERTEX;
+	VERTEX_OFFSET.x += (
+		random(
+			( trunc( VERTEX_OFFSET.y))
+		+	TIME
+		) - 0.5
+	) * strength ;
+
+	VERTEX_OFFSET.y += (
+		random(
+			( trunc( VERTEX_OFFSET.x))
+		+	TIME
+		) - 0.5
+	) * strength;
+	
+	VERTEX = VERTEX_OFFSET;	
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6d2e"]
+resource_local_to_scene = true
+shader = SubResource("Shader_up2mm")
+shader_parameter/strength = 0.0
+shader_parameter/randomOffset = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sb4j"]
+bg_color = Color(1, 0.9475, 0.91, 0.12549)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5hkb"]
+bg_color = Color(0, 0, 0, 0)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 4
+
+[node name="NewClip" type="PanelContainer" node_paths=PackedStringArray("file_dialog")]
+modulate = Color(1, 1, 1, 0.392157)
+material = SubResource("ShaderMaterial_y6d2e")
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5sb4j")
+script = ExtResource("1_ugkps")
+file_dialog = NodePath("FileDialog")
+
+[node name="Shadow" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+layout_mode = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = -8
+theme_override_constants/margin_bottom = -16
+
+[node name="PanelContainer" type="PanelContainer" parent="Shadow"]
+show_behind_parent = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c5hkb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+text_overrun_behavior = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="DisplayName" type="Label" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+use_parent_material = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+position = Vector2i(0, 36)
+force_native = true
+use_native_dialog = true
+
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

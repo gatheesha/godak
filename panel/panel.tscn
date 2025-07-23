@@ -1,16 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjhhw0xd6282m"]
+[gd_scene load_steps=5 format=3 uid="uid://bjhhw0xd6282m"]
 
 [ext_resource type="Script" uid="uid://d2qe1kl6v6ije" path="res://panel/panel.gd" id="1_8b25k"]
 [ext_resource type="PackedScene" uid="uid://wysk8ngvohrk" path="res://soundboard_settings/sound_board_settings.tscn" id="2_0ia7a"]
 [ext_resource type="PackedScene" uid="uid://bfykok3ld6iit" path="res://audio_clip_settings/audio_clip_settings.tscn" id="2_ut24i"]
 [ext_resource type="Theme" uid="uid://bx4i3x1ork41p" path="res://default.tres" id="4_ah17s"]
-[ext_resource type="Texture2D" uid="uid://da60pcfdtisic" path="res://assets/ic--round-add-circle.svg" id="5_1x5mh"]
-[ext_resource type="Texture2D" uid="uid://1vj2cvig1mxf" path="res://assets/ic--round-stop-circle.svg" id="6_vvu2y"]
-[ext_resource type="Texture2D" uid="uid://b8iftnwma4364" path="res://assets/ic--round-settings.svg" id="7_g65rf"]
 
 [node name="Panel" type="MarginContainer" node_paths=PackedStringArray("file_dialog")]
-offset_right = 194.0
-offset_bottom = 31.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
@@ -23,7 +25,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-alignment = 2
+alignment = 1
 
 [node name="SoundboardSettings" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_0ia7a")]
 unique_name_in_owner = true
@@ -38,26 +40,24 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Import" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_ah17s")
-icon = ExtResource("5_1x5mh")
-flat = true
-icon_alignment = 1
+text = "ADD"
 
 [node name="Stop" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-icon = ExtResource("6_vvu2y")
-flat = true
+text = "STOP"
 icon_alignment = 1
 
 [node name="Settings" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-icon = ExtResource("7_g65rf")
-flat = true
+text = "OPTIONS"
 icon_alignment = 1
 
 [node name="FileDialog" type="FileDialog" parent="."]
