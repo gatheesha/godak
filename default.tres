@@ -52,7 +52,7 @@ corner_detail = 4
 
 [resource]
 default_font = ExtResource("1_nixot")
-default_font_size = 16
+default_font_size = 32
 Button/colors/font_color = Color(1, 0.717647, 0.0117647, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/colors/icon_normal_color = Color(1, 1, 1, 1)

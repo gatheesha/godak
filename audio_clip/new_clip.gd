@@ -6,7 +6,6 @@ const ANIMATE_DURATION : float = 0.2
 var tween
 
 func _ready():
-	$FileDialog.root_subfolder = "/storage/emulated/0"
 	scale = Vector2(0,0)
 	pivot_offset = size/2
 	spawn_animation()

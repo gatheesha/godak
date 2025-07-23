@@ -8,11 +8,12 @@ var last_new_node
 func _ready() -> void:
 	soundboard_manager.audio_grid = self
 	soundboard_manager.window_resized.connect(on_window_resized)
+	soundboard_manager.window_resized.emit()
 	create_new_clip_node()
 
 
 func on_window_resized()-> void:
-	var v : float = get_viewport_rect().size.x / (128 + 32)
+	var v : float = get_viewport_rect().size.x / (192 + 32)
 	columns = int(v)
 
 

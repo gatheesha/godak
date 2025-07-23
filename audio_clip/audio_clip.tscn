@@ -64,7 +64,7 @@ corner_detail = 4
 
 [node name="AudioClip" type="PanelContainer" groups=["audio_clips"]]
 material = SubResource("ShaderMaterial_y6d2e")
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(192, 192)
 offset_right = 128.0
 offset_bottom = 128.0
 size_flags_horizontal = 3

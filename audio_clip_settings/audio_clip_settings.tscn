@@ -86,9 +86,11 @@ text = "Cancel"
 auto_translate_mode = 1
 title = "Replace File"
 position = Vector2i(0, 36)
+force_native = true
 ok_button_text = "Open"
 mode_overrides_title = false
 file_mode = 0
+use_native_dialog = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_s01mg")

@@ -22,10 +22,12 @@ ButtonSoundPlayer="*res://global/button_sound_player.tscn"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=1920
+window/size/viewport_width=720
+window/size/viewport_height=1280
 window/size/window_width_override=480
 window/size/window_height_override=853
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [global_group]
@@ -40,3 +42,4 @@ theme/custom="uid://bx4i3x1ork41p"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

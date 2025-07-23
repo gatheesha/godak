@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjhhw0xd6282m"]
+[gd_scene load_steps=4 format=3 uid="uid://bjhhw0xd6282m"]
 
 [ext_resource type="Script" uid="uid://d2qe1kl6v6ije" path="res://panel/panel.gd" id="1_8b25k"]
 [ext_resource type="PackedScene" uid="uid://wysk8ngvohrk" path="res://soundboard_settings/sound_board_settings.tscn" id="2_0ia7a"]
 [ext_resource type="PackedScene" uid="uid://bfykok3ld6iit" path="res://audio_clip_settings/audio_clip_settings.tscn" id="2_ut24i"]
-[ext_resource type="Theme" uid="uid://bx4i3x1ork41p" path="res://default.tres" id="4_ah17s"]
 
-[node name="Panel" type="MarginContainer" node_paths=PackedStringArray("file_dialog")]
+[node name="Panel" type="MarginContainer"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -18,7 +17,6 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 script = ExtResource("1_8b25k")
-file_dialog = NodePath("FileDialog")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -36,36 +34,11 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Import" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("4_ah17s")
-text = "ADD"
-
-[node name="Stop" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-text = "STOP"
-icon_alignment = 1
-
-[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "OPTIONS"
 icon_alignment = 1
 
-[node name="FileDialog" type="FileDialog" parent="."]
-auto_translate_mode = 1
-position = Vector2i(0, 36)
-force_native = true
-use_native_dialog = true
-
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Import" to="." method="_on_import_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/Stop" to="." method="_on_stop_pressed"]
-[connection signal="toggled" from="PanelContainer/VBoxContainer/HBoxContainer/Settings" to="." method="_on_settings_toggled"]
+[connection signal="toggled" from="PanelContainer/VBoxContainer/Settings" to="." method="_on_settings_toggled"]

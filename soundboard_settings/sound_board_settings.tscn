@@ -12,7 +12,7 @@ load_file_dialog = NodePath("LoadFileDialog")
 auto_translate_mode = 1
 force_native = true
 access = 2
-filters = PackedStringArray(".godk")
+filters = PackedStringArray("*.godk")
 use_native_dialog = true
 
 [node name="LoadFileDialog" type="FileDialog" parent="."]
