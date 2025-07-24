@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bl8vda4h2bwyh"]
 
-[ext_resource type="Script" uid="uid://bro1swalhgffx" path="res://Notify/notify.gd" id="1_i803y"]
+[ext_resource type="Script" uid="uid://bro1swalhgffx" path="res://notify/notify.gd" id="1_i803y"]
 
 [node name="Notify" type="MarginContainer"]
 anchors_preset = 10

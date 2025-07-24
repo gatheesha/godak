@@ -11,20 +11,21 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("1_ur2fg")
 
-[node name="IncreaseButton" type="Button" parent="."]
+[node name="DecreaseButton" type="Button" parent="."]
 layout_mode = 2
-text = " + "
+text = " - "
 
 [node name="VolumeSlider" type="HSlider" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+value = 20.0
 
-[node name="DecreaseButton" type="Button" parent="."]
+[node name="IncreaseButton" type="Button" parent="."]
 layout_mode = 2
-text = " - "
+text = " + "
 
-[connection signal="pressed" from="IncreaseButton" to="." method="_on_increase_button_pressed"]
-[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="DecreaseButton" to="." method="_on_decrease_button_pressed"]
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="IncreaseButton" to="." method="_on_increase_button_pressed"]

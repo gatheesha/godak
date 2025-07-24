@@ -25,24 +25,36 @@ access = 2
 filters = PackedStringArray("*.godk")
 use_native_dialog = true
 
+[node name="VolumeController" parent="." instance=ExtResource("1_sdyqd")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="SaveButton" type="Button" parent="."]
 layout_mode = 2
 text = "Save"
+
+[node name="HSeparator3" type="HSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="LoadButton" type="Button" parent="."]
 layout_mode = 2
 text = "Load"
 
+[node name="HSeparator4" type="HSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="NewButton" type="Button" parent="."]
 layout_mode = 2
 text = "New Project"
 
-[node name="VolumeController" parent="." instance=ExtResource("1_sdyqd")]
-layout_mode = 2
-
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
+[connection signal="volume_changed" from="VolumeController" to="." method="_on_volume_controller_volume_changed"]
 [connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="NewButton" to="." method="_on_new_button_pressed"]
-[connection signal="volume_changed" from="VolumeController" to="." method="_on_volume_controller_volume_changed"]

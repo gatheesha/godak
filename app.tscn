@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkabwl483e1d" path="res://background/background.tscn" id="2_d7sxu"]
 [ext_resource type="PackedScene" uid="uid://bjhhw0xd6282m" path="res://panel/panel.tscn" id="2_i4801"]
 [ext_resource type="Script" uid="uid://5eexlsjakntb" path="res://audio_grid/grid_container.gd" id="2_qbwvd"]
-[ext_resource type="PackedScene" uid="uid://bl8vda4h2bwyh" path="res://Notify/notify.tscn" id="4_nee2x"]
+[ext_resource type="PackedScene" uid="uid://bl8vda4h2bwyh" path="res://notify/notify.tscn" id="4_nee2x"]
 [ext_resource type="Script" uid="uid://bx600xmw11qfk" path="res://bottom_bar/bottom_bar.gd" id="4_v7vdx"]
 
 [sub_resource type="Shader" id="Shader_d7sxu"]
@@ -131,10 +131,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
 clip_contents = false
@@ -146,8 +146,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/h_separation = 32
-theme_override_constants/v_separation = 32
+theme_override_constants/h_separation = 48
+theme_override_constants/v_separation = 48
 script = ExtResource("2_qbwvd")
 
 [node name="BottomBar" type="VBoxContainer" parent="."]

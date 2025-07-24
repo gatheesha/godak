@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bx4i3x1ork41p"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://bx4i3x1ork41p"]
 
 [ext_resource type="FontFile" uid="uid://h11s10ie5be5" path="res://assets/prstartk.ttf" id="1_nixot"]
 
@@ -22,6 +22,7 @@ content_margin_top = 16.0
 content_margin_right = 16.0
 content_margin_bottom = 16.0
 bg_color = Color(0, 0, 0, 1)
+border_color = Color(1, 0.7195, 0.00999999, 0.0862745)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -38,6 +39,62 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+corner_detail = 4
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_nixot"]
+color = Color(0.08, 0.08, 0.08, 1)
+thickness = 2
+
+[sub_resource type="ImageTexture" id="ImageTexture_nixot"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_frq1j"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_jsgte"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ir6w1"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 0.717647, 0.0117647, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7ndg"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.717647, 0.0117647, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3a8jl"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.717647, 0.0117647, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
 corner_detail = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nixot"]
@@ -60,5 +117,13 @@ Button/styles/focus = SubResource("StyleBoxEmpty_nixot")
 Button/styles/hover = SubResource("StyleBoxFlat_jsgte")
 Button/styles/normal = SubResource("StyleBoxFlat_frq1j")
 Button/styles/pressed = SubResource("StyleBoxFlat_lb50s")
+HSeparator/constants/separation = 8
+HSeparator/styles/separator = SubResource("StyleBoxLine_nixot")
+HSlider/icons/grabber = SubResource("ImageTexture_nixot")
+HSlider/icons/grabber_disabled = SubResource("ImageTexture_frq1j")
+HSlider/icons/grabber_highlight = SubResource("ImageTexture_jsgte")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_ir6w1")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_y7ndg")
+HSlider/styles/slider = SubResource("StyleBoxFlat_3a8jl")
 Label/colors/font_color = Color(0, 0, 0, 1)
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_nixot")
