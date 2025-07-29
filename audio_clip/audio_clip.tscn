@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vem0gynk856"]
+[gd_scene load_steps=5 format=3 uid="uid://vem0gynk856"]
 
 [ext_resource type="Script" uid="uid://0lt54r6wilv7" path="res://audio_clip/audio_clip.gd" id="1_up2mm"]
 [ext_resource type="AudioStream" uid="uid://bnmgw2q2vnyy7" path="res://assets/DM-CGS-21.wav" id="2_y6d2e"]
@@ -40,28 +40,6 @@ shader = SubResource("Shader_up2mm")
 shader_parameter/strength = 0.0
 shader_parameter/randomOffset = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up2mm"]
-bg_color = Color(1, 0.94902, 0.913725, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6d2e"]
-bg_color = Color(0, 0, 0, 1)
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-corner_detail = 4
-
 [node name="AudioClip" type="PanelContainer" groups=["audio_clips"]]
 material = SubResource("ShaderMaterial_y6d2e")
 custom_minimum_size = Vector2(192, 192)
@@ -69,7 +47,6 @@ offset_right = 128.0
 offset_bottom = 128.0
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_up2mm")
 script = ExtResource("1_up2mm")
 
 [node name="Shadow" type="MarginContainer" parent="."]
@@ -83,7 +60,6 @@ theme_override_constants/margin_bottom = -16
 [node name="PanelContainer" type="PanelContainer" parent="Shadow"]
 show_behind_parent = true
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y6d2e")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl8vda4h2bwyh"]
+[gd_scene load_steps=3 format=3 uid="uid://bl8vda4h2bwyh"]
 
-[ext_resource type="Script" uid="uid://bro1swalhgffx" path="res://notify/notify.gd" id="1_i803y"]
+[ext_resource type="Script" uid="uid://bro1swalhgffx" path="res://notifcations/notifications.gd" id="1_i803y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ceb68"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="Notify" type="MarginContainer"]
 anchors_preset = 10
@@ -18,6 +21,7 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.329412, 0.301961, 1)
 text = "Test Debug Message"
+label_settings = SubResource("LabelSettings_ceb68")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2

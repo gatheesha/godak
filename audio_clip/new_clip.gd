@@ -17,7 +17,7 @@ func _ready():
 	
 func _on_files_selected(paths):
 	for path in paths:
-		soundboard_manager.create_new_audio_clip(path)
+		soundboard_manager.create_audio_clip_from_path(		path)
 	
 
 func _on_button_pressed() -> void:

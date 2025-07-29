@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvjgrvd4oy1rw"]
+
+[ext_resource type="Script" uid="uid://b8avsdu2b8mav" path="res://snap_to_grid/drag_and_drop_movement_component.gd" id="1_g0ddc"]
+
+[node name="DragAndDropMovementComponent" type="TouchScreenButton"]
+script = ExtResource("1_g0ddc")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="released" from="." to="." method="_on_released"]

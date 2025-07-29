@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://carurv3bkb7ah"]
+
+[ext_resource type="Script" uid="uid://dyqd7fpvjt8a5" path="res://snap_to_grid/snap_to_grid.gd" id="1_qndo0"]
+[ext_resource type="Texture2D" uid="uid://b2o3opthpi24r" path="res://icon.svg" id="2_xmrcx"]
+[ext_resource type="Resource" uid="uid://qr8ahv8lcf3j" path="res://snap_to_grid/default_snap.tres" id="3_xmrcx"]
+[ext_resource type="Script" uid="uid://b8avsdu2b8mav" path="res://snap_to_grid/drag_and_drop_movement_component.gd" id="4_kfk4a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qndo0"]
+radius = 80.0
+
+[node name="Node" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_xmrcx")
+
+[node name="SnapToGridComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("1_qndo0")
+actor = NodePath("..")
+snap_to_grid_stats = ExtResource("3_xmrcx")
+metadata/_custom_type_script = "uid://dyqd7fpvjt8a5"
+
+[node name="DragAndDropMovementComponent" type="TouchScreenButton" parent="." node_paths=PackedStringArray("actor", "snap_to_grid_component")]
+shape = SubResource("CircleShape2D_qndo0")
+script = ExtResource("4_kfk4a")
+actor = NodePath("..")
+snap_to_grid_component = NodePath("../SnapToGridComponent")
+metadata/_custom_type_script = "uid://b8avsdu2b8mav"

@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3ldxdnveqe0v"]
+
+[ext_resource type="Texture2D" uid="uid://texs2y1al4b2" path="res://assets/grid.png" id="1_j2q8x"]
+[ext_resource type="PackedScene" uid="uid://carurv3bkb7ah" path="res://audio_clip/node.tscn" id="2_112p8"]
+[ext_resource type="Script" uid="uid://buejswanw5jt8" path="res://grid/grid.gd" id="2_e2u21"]
+[ext_resource type="Script" uid="uid://blltx0u4su4d" path="res://camera/camera_2d.gd" id="3_112p8"]
+
+[sub_resource type="Shader" id="Shader_e2u21"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec2 resolution = vec2(600,600);
+uniform vec3 line_color: source_color = vec3(0.2,0.3,0.5);
+uniform float cell_size: hint_range(1.0, 1000.0, 1.0) = 20.0; // Cell size in pixels
+uniform float thickness: hint_range(0.0, 10.0, 0.1) = 2.0;
+uniform float brightness: hint_range(0.0, 4.0, 0.1) = 2.0;
+
+float draw_grid(vec2 uv) {
+    vec2 grid_uv = cos(uv * TAU);
+    return max(grid_uv.x, grid_uv.y);
+}
+
+void fragment() {
+    vec2 uv = UV;
+    // Convert cell size from pixels to UV space, using resolution.y for consistent square cells
+    float scale = resolution.y / cell_size;
+    float line_thickness = scale * thickness / resolution.y;
+    vec3 color = smoothstep(1.0 - line_thickness, 1.0, draw_grid(uv * scale)) * line_color;
+    COLOR.a = (color * brightness).r;
+	//COLOR = vec4(1.0) * COLOR;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bss38"]
+shader = SubResource("Shader_e2u21")
+shader_parameter/resolution = Vector2(1280, 1280)
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/cell_size = 180.0
+shader_parameter/thickness = 0.6
+shader_parameter/brightness = 0.3
+
+[node name="Node" type="Node"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Grid2" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_bss38")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 560.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Grid" type="TextureRect" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_j2q8x")
+stretch_mode = 1
+script = ExtResource("2_e2u21")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+anchor_mode = 0
+script = ExtResource("3_112p8")
+
+[node name="Node" parent="Node2D" instance=ExtResource("2_112p8")]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SnapToGridStats" load_steps=2 format=3 uid="uid://qr8ahv8lcf3j"]
+
+[ext_resource type="Script" uid="uid://c6vuoccp7yhsi" path="res://snap_to_grid/snap_to_grid_stats.gd" id="1_ldqo0"]
+
+[resource]
+script = ExtResource("1_ldqo0")
+x_axis = true
+y_axis = true
+positioning_step = Vector2(180, 180)
+positioning_offset = Vector2(90, 90)
+position_offset = Vector2(0, 0)
+scaling_step = Vector2(1, 1)
+metadata/_custom_type_script = "uid://c6vuoccp7yhsi"

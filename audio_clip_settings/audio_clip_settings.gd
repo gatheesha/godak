@@ -43,6 +43,7 @@ func _on_rename_button_pressed() -> void:
 	
 func _on_delete_button_pressed() -> void:
 	audio_clip.delete_audio_clip()
+	soundboard_manager.cleanup_soundboard()
 	close()
 	
 	

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b85o7gs70ya8g"]
+
+[ext_resource type="Script" uid="uid://bx600xmw11qfk" path="res://notifcations/notifications_container.gd" id="1_xi41m"]
+
+[node name="NotificationContainer" type="VBoxContainer"]
+script = ExtResource("1_xi41m")
